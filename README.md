@@ -23,3 +23,24 @@
     <a href="#modelling-methods">Modelling methods</a> •
     <a href="#architecture-of-db-(sql-server)/physical/logical">Architecture of DB(SQL-server)/physical/logical</a> •
 </p>
+
+<p align="center">
+    <br>
+    Additions
+    </br>
+    <a href="#dql">Data Query Language</a> •
+    <a href="#where-clause">WHERE Clause</a> •
+    <a href="#aggregate-functions-in-sql">Aggregate functions in SQL</a> •
+    <a href="#order-by-clause">ORDER BY Clause</a> •
+    <a href="#group-by-clause">GROUP BY Clause</a> •
+    <a href="#having-clause">HAVING Clause</a> •
+    <a href="#any/all-clause">ANY/ALL Clause</a> •
+    <a href="#as-clause">AS Clause</a> •
+    <a href="#case-expression">CASE Expression</a> •
+    <a href="#join">JOIN</a> •
+    <a href="#union">UNION</a> •
+    <a href="#dml">Data Manipulaion Language</a> •
+    <a href="#ddl">Data Definition Language</a> •
+    <a href="#data-types">Data types</a> •
+    <a href="#constraints">Constraints</a> •
+</p>
