@@ -161,4 +161,73 @@ Main elements:
     - **Referential**: Referential integrity constraints are rules that ensure relationships between tables remain consistent. They enforce that a **foreign key** in one table must either match a value in the **referenced primary key** of another table or be NULL
     - **Semantic**: Semantic integrity ensures that data complies with the business logic and rules established for a specific application or business process. CHECK and TRIGGERS.
 
-## 
+## Database Architecture
+
+### DBMS Architecture
+
+The architecture of a database management system (DBMS) is a multi-level structure that provides efficient data management, storage, processing and access. The architecture of a DBMS may vary depending on the specific system and its features, but the basic components and levels remain similar.
+    - **User layer (External)**: 
+        - **Users**: Includes end users, applications, and interfaces that interact with the database.
+        - **User Views**: The views of the data that the user sees and works with. These can include various interfaces such as graphical user interfaces (GUIs), web interfaces, and applications.
+    - **Conceptual layer**:
+        - **Conceptual schema**: A single, global data model that describes the structure of the entire database and the relationships between the data. It defines the logical structure of the data, including tables, columns, relationships, constraints, and integrity rules.
+        - **System Catalog**: Metadata about the structure of the database, including information about tables, indexes, constraints, users, and access rights.
+    - **Internal Layer**:
+        - **Internal schema**: Describes the physical structure of data storage, including files, indexes, access paths, and data storage methods.
+        - **Physical Storage**: The mechanisms by which data is stored on physical media such as hard drives or SSDs.
+
+### *file server" / Desktop DBMS
+
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/1_tier_level.jpg)
+
+It is a model in which the database is stored on a **file server**, and clients access the database by interacting with files through **network protocols**. In this architecture, the database itself is located on the server, and client applications use network file systems to access the data.
+
+- A local copy of the data is created for each user while they are running.
+- **Advantages**: 
+    - **Centralized data management**:
+    All database files are stored in one place, making it easier to manage.
+    - **Simplified administration**:
+    Management of file permissions and security is centralized on the file server.
+    - **Ease of setup**
+- **Disadvantages**:
+    - **Limited performance**:
+    Performance may suffer due to network latency and bandwidth, especially with large amounts of data or many concurrent requests.
+    - **Data consistency issues**:
+    Possible issues with data consistency and transaction management.
+    - **Single point of failure**:
+    The file server becomes a single point of failure; if the server fails, all access to the database may be lost.
+
+### 2-Tier-Level Architecture "client-server"
+
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/2_tier_level.jpg)
+
+It is a model in which the main data processing and application logic is performed on the **client side**, and the **server** is responsible for **storing and managing data**. A thick client differs from a thin client in that it has more computing resources and functionality on the client side, allowing much of the work to be done locally.
+
+- **Advantages**:
+    - **Performance**: Most of the processing is performed on the client, the load on the server is reduced, which can improve overall system performance.
+    - **Functionality**: A thick client can provide a richer, more interactive user interface that can operate offline during temporary network outages.
+    - **Reduced network load**
+- **Disadvantages**:
+    - **Administration and updating**: Updating client applications can be complex, especially if there are many client devices to update
+    - **Security**: Data processed and stored on the client device may be more vulnerable to attack.
+    - **Compatibility**: Hardware and software requirements on client devices may vary.
+
+### 3-Tier-level Architecture
+
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/3_tier_level.jpg)
+
+It is a**client-server architecture** model in which the application logic is divided into **three** interconnected tiers: the **Presentation** Tier, the **Application Logic** Tier, and the **Data** Tier. This structure provides flexibility, scalability, and simplifies application management.
+
+- **Main components**:
+    - **Presentation Tier**: Web pages, mobile applications, desktop programs.
+    - **Application Logic Tier**: Application server, request handlers, controllers, business logic services.
+    - **Data Tier**: 
+        - Technologies: DBMS (e.g. MySQL, PostgreSQL, Oracle, SQL Server), NoSQL databases (e.g. MongoDB, Cassandra), file systems, cloud storage. 
+        - Examples: Databases, data management systems, data warehouses.
+- **Advantages**: 
+    - **Scalabilty**: Adding new servers or resources as needed.
+    - **Flexibility and reuse**
+    - **Increased reliability**
+
+## Operations in Relational Algebra
+
