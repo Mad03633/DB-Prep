@@ -231,3 +231,55 @@ It is a**client-server architecture** model in which the application logic is di
 
 ## Operations in Relational Algebra
 
+- **UNION**: The union of two type-compatible relations 
+F, consisting of attributes (A1, A2,..., An}
+S, consisting of attributes (A1, A2,..., An} is a relation **R = (F U S)**
+    - with the same schema as relations F and S
+    - and a body consisting of tuples belonging to either F or S, or both at once.
+    
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/UNION.png)
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/UNION_ex.jpg)
+
+- **INTERSECTION**: The intersection of two type-compatible relations
+F, consisting of attributes (A1, A2,..., An} and
+S, consisting of attributes {A1, A2,..., An} is a relation **R = (F ∩ S)**
+    - with the same schema as relations F and S
+    - and a body consisting of tuples belonging to both relations simultaneously.
+
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/INTERSECTION.png)
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/INTERSECTION_ex.jpg)
+
+- **DIFFERENCE**: The difference of two type-compatible relations
+F, consisting of attributes (A1, A2...., An} and
+S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
+    - with the same schema as relations F and S
+    - and a body consisting of tuples belonging to relation F and not belonging to relation S. 
+
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/DIFFERENCE.png)
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/DIFFERENCE_ex.jpg)
+
+- **Cartesian product and relations**: The Cartesian product of relations F, consisting of attributes {F1, F2,..., Fn} and S, consisting of attributes (S1, S2,..., Sm} is a relation **R = (F X S)**,
+    - whose schema is the result of concatenating the schemas of the original relations: {F1, F2,.., Fn, S1, S2,., Sm},
+    - and the body consists of a set of tuples {f1, f2,..., fn, s1, s2,..., sm}
+
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/CARTESIAN.jpg)
+
+- **Selection**: Main Concepts -> Relational Algebra -> Main operations -> Unary
+- **Projection**: Main Concepts -> Relational Algebra -> Main operations -> Unary
+- **JOIN**: A general name for binary operators on relations that allow data from two relations to be combined into one in some way. 
+    - **Cross/Cartesian Join**: Two relations R1 and R2 that have no common attributes is a relation in which the header is the union of the headers of R1 and R2, and the body is the product of the bodies of R1 and R2. Notation: R1xR2. If two relations have at least one common attribute in the header, their cross join is not defined.
+
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/CROSS_CARTESIAN_JOIN.jpg)
+
+    - **Natural Join**: Two relations R1 and R2 is a relation in which the header is the union of the headers of R1 and R2, and the body consists of tuples obtained by all possible joins of tuples R1 and R2 that have equal values of the same attributes.
+
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/NATURAL_JOIN.jpg)
+
+    - **Semijoin**: 
+        - **Left Semijoin**: Two relations R1 and R2 is a relation in which the header is equal to the header of R1, and the body consists of tuples in R1 for which there is a tuple from R2 with equal values of the same attributes.
+        - **Right Semijoin**: Two relations R1 and R2 is a relation in which the header is equal to the header of R2, and the body consists of tuples in R2 for which there is a tuple from R1 with equal values of the same attributes. 
+
+        ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/LEFT_RIGHT_Semijoin.jpg)
+
+## Basics of ER-modelling
+
