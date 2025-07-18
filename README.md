@@ -120,3 +120,45 @@ Main elements:
 
 ## Data Integrity
 
+**Data integrity** is a process and set of **rules** designed to ensure the correctness, accuracy, and reliability of data in a database.
+
+- **Integrity Constraints**: 
+    - **PRIMARY KEY**: Ensures uniqueness and does not allow NULL values.
+    - **FOREIGN KEY**: Ensures referential integrity between tables.
+    - **UNIQUE**: Ensures unique values in a column or group of columns.
+    - **NOT NULL**: Ensures that a column does not contain NULL values.
+    - **CHECK**: Ensures that a value in a column meets a certain condition.
+- **Triggers**: 
+    - A **trigger** is a procedural statement in a database that is automatically executed in response to certain events such as INSERT, UPDATE, or DELETE.
+    ```
+    CREATE TRIGGER SalaryCheck
+    BEFORE INSERT ON Employees
+    FOR EACH ROW
+    BEGIN
+        IF NEW.salary < 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Salary must be positive number'
+        END IF
+    END
+    ```
+- **RULES**:
+    - **Rules** define business logic and constraints that must be met when working with data.
+    - It can include user-defined functions and procedures for validating and processing data.
+
+### Integrity Types
+
+- **Physical integrity**:
+    - Protecting data from external factors such as natural disasters, power outages, or hackers falls under the scope of physical integrity.
+- **Logical integrity**:
+    - **Domain**: Domain constraints are a type of integrity constraint that **ensure the values stored** in a column (or attribute) of a database are valid and within a specific range or domain.
+    ```
+    CREATE TABLE Employees (
+        id INT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL
+        age INT CHECK (age >= 0 AND age <= 120), // range
+        email VARCHAR(255) UNIQUE
+    )
+    ```
+    - **Referential**: Referential integrity constraints are rules that ensure relationships between tables remain consistent. They enforce that a **foreign key** in one table must either match a value in the **referenced primary key** of another table or be NULL
+    - **Semantic**: Semantic integrity ensures that data complies with the business logic and rules established for a specific application or business process. CHECK and TRIGGERS.
+
+## 
