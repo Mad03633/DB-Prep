@@ -10,7 +10,7 @@
     <a href="#dbms-architecture">Database Architecture</a> •
     <a href="#operations-in-relational-algebra">Operations in Relational Algebra</a> •
     <a href="#basics-of-ER-modelling">Basics of ER-modelling</a> •
-    <a href="#keys">Keys</a> •
+    <a href="#functional-dependency-and-keys">Functional dependency and Keys</a> •
     <a href="#table-relationships">Table Relationships</a> •
     <a href="#aggregate-functions">Aggregate Functions</a> •
     <a href="#filtering-and-searching-data">Filtering and Searching data</a> •
@@ -317,3 +317,51 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
             - **Example**: One instructor teaches many courses, but each course is taught by only one instructor.
         - **Many-to-many (M:M)**: Each entity of one category can be related to multiple entities of another category, and vice versa.
             - **Example**: Students are enrolled in many courses, and each course can have many students.
+
+## Functional dependency and Keys
+
+### The concept of functional dependency
+
+- **Functional dependency** is a fundamental concept in database theory used to analyze and normalize relational databases. A functional dependency defines a **relationship between attributes** in a table, indicating that the value of **one set of attributes** uniquely determines the value of **another set of attributes**.
+    - A functional dependency between two sets of attributes A and B in a relational table is written as: **A→B**
+    - This is read as **"A functionally determines B"** and means that if two rows in table I have the same value for attribute A, then they will also have the same value for attribute B.
+
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/functional_dependency.jpg)
+
+   - *student_id → name, birthdate, major*
+    **A student identifier (student_id) uniquely identifies a student's name, birthdate, and major.**
+    - *name, birthdate → student_id*:
+    **The combination of name and birthdate uniquely identifies a student identifier (in this case).**
+
+- **Types of functional dependencies**:
+    - **Trivial functional dependency**: A dependency is called trivial if the dependent set of attributes **is a subset** of the defining set.
+        - **Example**: **{name, birthdate} → name**
+    - **Non-trivial functional dependency**: A dependency is called non-trivial if the dependent set of attributes is **not a subset** of the defining set.
+        - **Example**: **student_id → name**
+    - **Fully functional dependency**: A dependency is called complete if the dependent set of attributes **depends on the entire defining set** and does not depend on its subset.
+        - **Example**: **{student_id, name} → major** (if major depends only on the combination of **both attributes**, and not on each separately).
+    - **Partial functional dependency**: A dependency is called partial if the **dependent set** of attributes **depends on a subset** of the defining set.
+        - **Example**: **{student_id, major} → name** (if name can be determined only from student_id).
+    - **Example**: 
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/functional_dependency_ex.jpg)
+        - **course_id -> course_name, instructor_name**
+        - Math appears 2 times because both students are taking the same course.
+        - To eliminate redundancy, we can **split** the table **into two**.
+            - !!! We have now removed redundancy by using functional dependencies to normalize the data.
+
+### The process of extracting a primary key from a candidate key
+
+- **Primary key selection criteria**:
+    - **Uniqueness**
+    - **Minimum size**
+    - **Immutability**
+    - **Simplicity and efficiency**: Numeric keys are preferred because they are fast to process and require less storage than text keys.
+    - **Usage frequency**: Keys that are frequently used in queries and references to other tables should be selected as primary keys to improve performance.
+- **Algorithm**:
+    1. **Identifying all candidate keys**: This step involves identifying all possible combinations of attributes that can uniquely identify a row in the table.
+    2. **Minimality check**: Ensure that each **candidate key** is **minimal**, meaning it does not contain any extra attributes that can be removed while maintaining unique identification.
+    3. **Selecting a primary key**:
+        - From all identified **candidate keys**, select one to be used as the **primary key**. This choice can be based on various criteria, such as:
+            - **Simple composition**: the key should be as simple as possible (fewer attributes).
+            - **Frequency of use**: keys that are used more often for references are preferred.
+            - **Performance**: keys with numeric values are usually preferred due to faster processing.
