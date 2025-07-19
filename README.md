@@ -437,3 +437,52 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Aggregate Functions
 
+- **COUNT()**: It returns the number of rows that match a given condition or are present in a column.
+    - **COUNT(*)**: Counts all rows.
+    - **COUNT(column_name)**: Counts non-NULL values in the specified column.
+    - **COUNT(DISTINCT column_name)**: Counts unique non-NULL values in the column.
+    - **Examples**:
+        ```
+        -- Total number of records in the table
+        SELECT COUNT(*) AS TotalRecords FROM Employee;
+
+        -- Count of non-NULL salaries
+        SELECT COUNT(Salary) AS NonNullSalaries FROM Employee;
+
+        -- Count of unique non-NULL salaries
+        SELECT COUNT(DISTINCT Salary) AS UniqueSalaries FROM Employee;
+        ```
+- **SUM()**: It calculates the total sum of a numeric column.
+    - **SUM(column_name)**: Returns the total sum of all non-NULL values in a column.
+    - **Examples**: 
+        ```
+        -- Calculate the total salary
+        SELECT SUM(Salary) AS TotalSalary FROM Employee;
+
+        -- Calculate the sum of unique salaries
+        SELECT SUM(DISTINCT Salary) AS DistinctSalarySum FROM Employee;
+        ```
+- **AVG()**: It calculates the average of a numeric column. It divides the sum of the column by the number of non-NULL rows.
+    - **AVG(column_name)**: Returns the average of the non-NULL values in the column.
+    - **Examples**: 
+        ```
+        -- Calculate the average salary
+        SELECT AVG(Salary) AS AverageSalary FROM Employee;
+
+        -- Average of distinct salaries
+        SELECT AVG(DISTINCT Salary) AS DistinctAvgSalary FROM Employee;
+        ```
+- **MIN() and MAX()**: The MIN() and MAX() functions return the smallest and largest values, respectively, from a column.
+    - **MIN(column_name)**: Returns the minimum value.
+    - **MAX(column_name)**: Returns the maximum value.
+    - **Examples**:
+        ```
+        -- Find the highest salary
+        SELECT MAX(Salary) AS HighestSalary FROM Employee;
+
+        -- Find the lowest salary
+        SELECT MIN(Salary) AS LowestSalary FROM Employee;
+        ```
+
+## Filtering and Searching data
+
