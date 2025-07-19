@@ -283,3 +283,37 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Basics of ER-modelling
 
+### Elements of ER-diagram
+
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/ER_model.jpg)
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/ER_model_symbols.jpg)
+
+- **Entities**: 
+    - **Entities** represent real-world objects or concepts that have meaning to the system.
+    - **Example**: "Student", "Course", "Teacher", "Book".
+    - **Notation**: Rectangles.
+        - **Strong entity**: A Strong Entity does not depend on any other Entity in the Schema for its identification.
+        - **Weak Entity**: It depends on a strong entity to be identified.
+        - **Example**: An order must always be made by a customer 
+            - Customer - **Strong entity**
+            - Order - **Weak entity**
+- **Attributes**: 
+    - **Attributes** describe properties or characteristics of **entities**.
+    - **Example**: Attributes of the entity "Student" might include "Name", "Age", "Student ID Number".
+    - **Notation**: **Ellipses** connected by lines to entities.
+        - **Simple**: Cannot be broken down into smaller parts (e.g. "Age").
+        - **Composite**: Can be broken down into smaller parts (e.g. "Address" might include "Street", "City", "Zip Code").
+        - **Key**: Attributes that allow to uniquely identify the entity, must be unique (ID, Ticket/Order Number).
+        - **Non-key**: Non-unique attributes of the entity (First Name, Last Name, Color).
+        - **Single-valued**: Can have only one value (e.g. "Student ID Number").
+        - **Multi-valued**: Can have multiple values (e.g. "Phone Numbers"). *not supported by relational models.
+- **Relationships**:
+    - **Relationships** describe how entities are related to each other.
+    - **Examples**: Student is enrolled in a Course", "Instructor teaches a Course".
+    - **Notations**: Diamonds connected by lines to entities.
+        - **One-to-one (1:1)**: Each entity of one category is related to at most one entity of another category.
+            - **Example**: One principal manages one school, and each school has only one principal.
+        - **One-to-many (1:M)**: Each entity of one category is related to multiple entities of another category.
+            - **Example**: One instructor teaches many courses, but each course is taught by only one instructor.
+        - **Many-to-many (M:M)**: Each entity of one category can be related to multiple entities of another category, and vice versa.
+            - **Example**: Students are enrolled in many courses, and each course can have many students.
