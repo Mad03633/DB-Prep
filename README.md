@@ -365,3 +365,75 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
             - **Simple composition**: the key should be as simple as possible (fewer attributes).
             - **Frequency of use**: keys that are used more often for references are preferred.
             - **Performance**: keys with numeric values are usually preferred due to faster processing.
+
+## Table Relationships
+
+### Types of Relationships
+
+- **One-to-one (1:1)**: In this relationship, each row in one table corresponds to one row in the other table.
+    - **Example**: Users table and UserProfiles table:
+        - Users (user_id, username, password)
+        - UserProfiles (profile_id, user_id, address, phone)
+        - In each **Users table**, a **user_id row** will correspond to exactly **one user_id row** in the **UserProfiles table**.
+    ```
+    CREATE TABLE Users (
+        user_id INT PRIMARY KEY,
+        username VARCHAR(50),
+        password VARCHAR(50)
+    )
+
+    CREATE TABLE UserProfiles (
+        profile_id INT PRIMARY KEY,
+        user_id INT UNIQUE,
+        address VARCHAR(255),
+        phone VARCHAR(20),
+        FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    )
+    ```
+- **One-to-Many (1:M)**: In this relationship, each row in one table corresponds to multiple rows in the other table.
+    - **Example**: Departments table and Employees table:
+        - **Departments** (department_id, department_name).
+        - **Employees** (employee_id, employee_name, department_id).
+        - A department can have many employees, but each employee belongs to only one department.
+    ```
+    CREATE TABLE Departments (
+        department_id INT PRIMARY KEY,
+        department_name VARCHAR(50)
+    )
+
+    CREATE TABLE Employees (
+        employee_id INT PRIMARY KEY,
+        employee_name VARCHAR(50),
+        department_id INT,
+        FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+    )
+    ```
+- **Many-to-Many (M:M)**: In this relationship, each row in one table can correspond to multiple rows in another table and vice versa.
+- To implement such a relationship, a third intermediate table (a relationship table) is required that stores the corresponding pairs of keys from the related tables.
+    - **Example**: Students table, Courses table, and Enrollments relationship table:
+        - **Students** (student_id, student_name).
+        - **Courses** (course_id, course_name).
+        - **Enrollments** (student_id, course_id).
+        - A single student can be enrolled in multiple courses, and a single course can have multiple students.
+    ```
+    CREATE TABLE Students (
+        student_id INT PRIMARY KEY,
+        student_name VARCHAR(50)
+    )
+
+    CREATE TABLE Courses (
+        course_id INT PRIMARY KEY,
+        course_name VARCHAR(50)
+    )
+
+    CREATE TABLE Enrollments (
+        student_id INT,
+        course_id INT,
+        PRIMARY KEY (student_id, course_id),
+        FOREIGN KEY (student_id) REFERENCES Students(student_id),
+        FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+    )
+    ```
+
+## Aggregate Functions
+
