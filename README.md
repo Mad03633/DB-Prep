@@ -649,3 +649,16 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Interactive mode with DB
 
+- **Command Line Interface (CLI)**: Many DBMSs provide command line interfaces through which you can execute SQL queries and manage the database.
+    - **Examples**: mysql for MySQL, psql for PostgreSQL, sqlplus for Oracle.
+- **Graphical User Interface (GUI)**: Graphical tools provide a more convenient way to work with the database by providing visual means for creating and executing queries.
+    - **Examples**: МySQL Workbench, pgAdmin, SQL Server Management Studio (SSMS).
+- **Interactive Shells**: Shells such as IPython or Jupyter Notebooks can be used to work interactively with the database via SQLAlchemy or other libraries.
+
+## Database Management
+
+## CREATE
+
+## ALTER
+
+## DROP
