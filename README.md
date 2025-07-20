@@ -15,7 +15,7 @@
     <a href="#aggregate-functions">Aggregate Functions</a> •
     <a href="#filtering-and-searching-data">Filtering and Searching data</a> •
     <a href="#sorting-and-grouping-results">Sorting and Grouping results</a> •
-    <a href="#data-sampling">Data Sampling</a> •
+    <a href="#data-selection">Data selection</a> •
     <a href="#interactive-mode-with-db">Interactive mode with DB</a> •
     <a href="#database-management">Database Management</a> •
     <a href="#subqueries">Subqueries</a> •
@@ -517,4 +517,135 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
         ```
 
 ## Sorting and Grouping results
+
+- **ORDER BY**: It is used **to sort** the query results by one or more columns. By default, sorting is performed in ascending order (ASC), but you can also specify descending order (DESC).
+    ```
+    -- Sorting by one column in descending order
+    SELECT * FROM Employees ORDER BY salary DESC
+    ```
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/order_by.jpg)
+
+    ```
+    -- Sorting by multiple columns
+    SELECT * FROM Employees ORDER BY department_id, salary
+    ```
+- **GROUP BY**: It is used **to group rows** that have the same values in the specified columns. It is **often used** together with **aggregate functions** (e.g. COUNT, SUM, AVG, MIN, MAX) to perform calculations on each group.
+    ```
+    -- Grouping by one column
+    SELECT department_id, COUNT(*) AS num_employees FROM Employees
+    GROUP BY department_id
+    /* OUTPUT
+    | department_id | num_employees |
+    |      10       |       30      |
+    |      11       |       25      |
+    */
+
+    -- Grouping by multiple columns
+    SELECT department_id, job_title, COUNT(*) AS num_employees FROM Employees
+    GROUP BY department_id, job_title
+    ```
+- **Having with GROUP BY**: It is used **to filter groups** after **GROUP BY** has been applied. It allows you to specify a condition that must be met for each group.
+    ```
+    -- Filtering groups by an aggregate function
+    SELECT department_id, COUNT(*) AS num_employees FROM Employees
+    GROUP BY department_id
+    HAVING COUNT(*) > 25
+    /* OUTPUT
+    | department_id | num_employees |
+    |      10       |       30      |
+    */
+    ```
+
+## Data Selection
+
+### Data Selection from one table
+
+- **Selecting all columns**: 
+    ```
+    SELECT * FROM Employees
+    ```
+- **Selecting several columns**:
+    ```
+    SELECT employee_id, name, salary FROM Employees
+    ``` 
+- **Selecting with condition**:
+    ```
+    SELECT employee_id, name, salary FROM Employees
+    WHERE department_id = 1
+    ```
+- **Selecting with sortion**:
+    ```
+    SELECT employee_id, name, salary FROM Employees
+    WHERE department_id = 1
+    ORDER BY salary DESC
+    ```
+
+### Data Selection from multiple tables
+
+- To retrieve data from multiple tables, use JOINs
+
+1. Student Table
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/data_selection_ex_1.jpg)
+2. StudentCourse Table
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/data_selection_ex_2.jpg)
+
+- **INNER JOIN**: Returns rows that have matching values in both tables.
+    ```
+    SELECT StudentCourse.COURSE_ID, Student.NAME, Student.Age FROM Student 
+    INNER JOIN ON Student.ROLL_NO = StudentCourse.ROLL_NO
+    ```
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/data_selection_inner_join.jpg)
+
+- **LEFT JOIN**: Returns all rows from the left table and matching rows from the right table. If there is no match, NULL is returned for the right table.
+    ```
+    SELECT Student.NAME, StudentCourse.COURSE_ID FROM Student 
+    LEFT JOIN StudentCourse ON StudentCourse.ROLL_NO = Student.ROLL_NO
+    ```
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/data_selection_left_join.jpg)
+
+- **RIGHT JOIN**: Returns all rows from the right table and matching rows from the left table. If there is no match, NULL is returned for the left table.
+    ```
+    SELECT Student.NAME, StudentCourse.COURSE_ID FROM Student 
+    RIGHT JOIN StudentCourse ON StudentCourse.ROLL_NO = Student.ROLL_NO
+    ```
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/data_selection_right_join.jpg)
+
+- **FULL JOIN**: Returns all rows when there is a match in one of the tables. If there is no match, NULL is returned for the opposite table.
+    ```
+    SELECT Student.NAME, StudentCourse.COURSE_ID FROM Student
+    FULL JOIN StudentCourse ON StudentCourse.ROLL_NO = Student.ROLL_NO
+
+    /*
+    |     NAME     |   COURSE_ID  |
+    |    HARSH     |       1      |
+    |    PRATIK    |       2      |
+    |    RIYANKA   |       2      |
+    |    DEEP      |       3      |
+    |    SAPTARHI  |       1      |
+    |    DAHNRAJ   |       NULL   |
+    |    ROHIT     |       NULL   |
+    |    NIRAJ     |       NULL   |
+    |    NULL      |       4      |
+    |    NULL      |       5     |
+    |    NULL      |       4     |
+    */
+    ```
+- **SELF JOIN**: Join a table with itself. Used to compare rows in one table.
+    ```
+    SELECT E1.employee_id, E1.name, E2.name AS manager_name FROM Employees AS E1
+    INNER JOIN Employees AS E2 ON E2.employee_id = E1.manager_id
+    ```
+- **Joining using subqueries**: Subqueries are used to perform nested queries.
+    ```
+    SELECT s.name, sc.course_count
+    FROM Students s
+    JOIN (
+        SELECT student_id, COUNT(*) AS course_count
+        FROM Enrollments
+        GROUP BY student_id
+    ) sc
+    ON s.student_id = sc.student_id;
+    ```
+
+## Interactive mode with DB
 
