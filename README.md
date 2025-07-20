@@ -486,3 +486,35 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Filtering and Searching data
 
+- **Main operators for filtering**:
+    - **WHERE**: Used to filter rows based on a specified condition.
+        ```
+        SELECT * FROM Employees WHERE departmend_id = 1;
+
+        SELECT * FROM Employees WHERE salary > 5000
+        ```
+    - **LIKE**: Used to find rows that match a pattern. Often used with wildcards.
+        ```
+        SELECT * FROM Employees WHERE name LIKE 'A%; -- Name starting with 'A'
+        SELECT * FROM Employees WHERE name LIKE '%son'; -- Name ending with 'son'
+        SELECT * FRON Employees WHERE name LIKE '_a%'; -- Name, where the second symbol is 'a'
+        ```
+    - **IN**: Used to filter rows whose value is within a specified list of values.
+        ```
+        SELECT * FROM Employees WHERE departmend_id IN (1, 2, 3);
+
+        SELECT * FROM Employees WHERE position IN ('Manager', 'Developer')
+        ```
+    - **BETWEEN**: Used to filter rows whose value is within a specified range.
+        ```
+        SELECT * FROM Employees WHERE salary BETWEEN 40000 AND 60000;
+
+        SELECT * FROM Employees WHERE hire_date BETWEEN '2020-01-01' AND '2021-01-01'
+        ```
+    - **IS NULL**: Used to find rows whose values are NULL.
+        ```
+        SELECT * FROM Employees WHERE manager_id IS NULL
+        ```
+
+## Sorting and Grouping results
+
