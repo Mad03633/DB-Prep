@@ -830,3 +830,61 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
     - **Increased complexity of updates**: Updating data may require changing multiple records in different locations, increasing the likelihood of errors.
     - **Data integrity issues**: It is more difficult to maintain data consistency, which can lead to anomalies.
 - **NOTE** that denormalization does not mean 'reversing normalization' or 'not to normalize'. It is an optimization technique that is applied after normalization.
+
+## Architecture of DB(SQL-server)/physical/logical
+
+### Architecture of DB(SQL-server)
+
+- **Database Engine**:
+    - **System core**: The main component that manages data storage, processing, and security.
+    - **Data storage**: Manages data files and transaction logs.
+    - **Procedures and functions**: Execute stored procedures and user-defined functions.
+- **SQL Server Agent**:
+    - **Task automation**: Schedule and execute tasks such as database backup, restore, and maintenance.
+- **SQL Server Browser**:
+    - **Query routing**: Helps clients connect to the correct 5QL Server instances.
+- **Analysis Services**:
+    - **Analytics**: Support for multidimensional data models and analytical queries.
+- **Reporting Services**:
+    **Reports**: Create, manage, and deploy reports.
+- **Integration Services**:
+    - **Data integration**: Tools for extracting, transforming, and loading (ETL) data.
+- **SQL Server instances**: These are separate SQL Server installations that can run on a single physical or virtual server. Each instance operates independently of the others, with its own settings, databases, services, and security. 
+    - **Default Instance**: The master instance installed by default.
+    - **Named Instance**: Additional instances that can be installed on the same server.
+- **Memory Architecture**:
+    - **Buffer Pool**: The main memory pool for caching data and indexes.
+    - **Data Cache**: Stores data pages in memory for fast access.
+    - **Procedure Cache**: Caches query execution plans and stored procedures.
+
+### Architecture of DB in physical layer
+
+- **Pages**: Basic units of data storage (8 KB each).
+    - **Data Pages**: Store rows of data.
+    - **Index pages**: Store indexes.
+    - **Text/Image Pages**: Store large objects (LOBs).
+    - **Global Allocation Map (GAM)**: Manage extent allocation.
+    - **Shared Global Allocation Map (SGAM)**: Manage free extents.
+    **Page Free Space (PFS)**: Manage free space on pages.
+- **Extents**: Groups of pages (8 pages or 64 KB).
+
+### Architecture of DB in logical layer
+
+- **Logical Objects**:
+    - **Tables**: Basic structures for storing data.
+    - **Views**: Logical tables based on query results.
+    - **Indexes**: Structures for speeding up data retrieval.
+    - **Schemas**: Logical association of database objects.
+    - **Constraints**: Rules for ensuring data integrity.
+- **Data types**:
+    - **Numeric data types**: int, decimal, float, etc.
+    - **Character data types**: char, varchar, text, etc.
+    - **Date and time**: date, datetime, time, etc.
+    - **Binary data types**: binary, varbinary, image.
+    - **Special data types**: XML, JSON, spatial.
+- **Security Management**:
+    - **Logins**: Managing access to the server.
+    - **Users**: Managing access to databases.
+    - **Roles**: Permission groups for managing access.
+    - **Permissions**: Assigning access rights.
+    - **Encryption**: Protecting data at the database level.
