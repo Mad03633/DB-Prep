@@ -19,7 +19,7 @@
     <a href="#interactive-mode-with-db">Interactive mode with DB</a> •
     <a href="#database-management">Database Management</a> •
     <a href="#subqueries">Subqueries</a> •
-    <a href="#modelling-types">Modelling types</a> •
+    <a href="#data-models">Data Models</a> •
     <a href="#modelling-methods">Modelling methods</a> •
     <a href="#architecture-of-db-(sql-server)/physical/logical">Architecture of DB(SQL-server)/physical/logical</a> 
 </p>
@@ -748,5 +748,26 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
                     WHERE E1.department_id = E2.department_id)
     ```
 
-## Modelling types
+## Data Models
+
+- **Conceptual data models**: This stage creates a conceptual data model that represents the structure of data and its relationships **without** taking into account **technical details**.
+    - **Activities**:
+        - Create an **ER (Entity-Relationship) diagram** to visualize entities, attributes, and the relationships between them.
+        - Define **entities** and **attributes**.
+        - Define **relationships** between entities (one-to-one, one-to-many, many-to-many).
+        - Define **primary** and **foreign keys**.
+- **Logical**: Logical design transforms the conceptual model into a **logical database structure** that can be implemented in a specific DBMS.
+    - **Activities**:
+        - Transform the **ER diagram into tables and columns**.
+        - Define **data types** for each column.
+        - Define **integrity constraints** (primary keys, foreign keys, unique and NOT NULL constraints).
+        - **Normalize data** to eliminate redundancy and ensure data integrity (apply normal forms).
+- **Physical**: Physical design involves creating the physical structure of the database taking into account the specific **DBMS features** and **performance requirements**.
+    - **Activities**:
+        - Defining the **data storage structure**(tables, indexes, views).
+        - Selecting data storage **methods** (table partitioning, indexing, clustering).
+        - Defining the **data backup and recovery policy**.
+        - **Tuning performance parameters** (e.g. caching, parallel processing).
+
+## Modelling methods
 
