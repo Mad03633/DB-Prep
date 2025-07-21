@@ -53,7 +53,7 @@ The **relational model** represents how data is stored and managed in **Relation
 
 ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/relational_model.jpg)
 
-Main elements:
+- **Main elements**:
     - **Key terms**:
         - **Relation Schema**: A relation schema defines the structure of the relation and represents the name of the relation with its attributes.
         - **Attribute**: Attributes are the properties that define an entity. (column)
@@ -771,3 +771,62 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Modelling methods
 
+### ER-modelling
+
+### Normalization
+
+- It is the process of organizing data in a database to **reduce redundancy** and **ensure data integrity**. Normalization is achieved by **breaking large tables into smaller ones** and establishing relationships between them. This process consists of several **normal forms (NF)**, each of which provides a certain level of normalization. Let's look at normal forms from **0NF to 3NF**.
+    - **0NF**: A table is in zero normal form if it does not satisfy any normalization rules. The data may be unstructured and contain duplicate records.
+
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/0NF.jpg)
+        - Skills contains many values in a single column
+    - **1NF**: 
+        - A table is in 1NF if it satisfies the following conditions:
+             - All columns contain **atomic values** (i.e., indivisible values).
+            - Each **row** is unique (i.e., no duplicate rows).
+            - Each **column** has a unique name.
+            - The order in which data is stored does not matter.
+        ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/1NF.jpg)
+            - Here, each skill value is atomic.
+    - **2NF**: A relation is in 2NF if it satisfies the conditions of **1NF** and **additionally**. **No partial dependency exists**, meaning every non-prime attribute (non-key attribute) must depend on the entire **primary key**, not just a part of it.
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/2NF.jpg)
+        - Let's split the Employees table into two tables: Employees and Skills.
+        - Here, Name depends only on EmployeeID, and Skill on the entire EmployeeID key.
+    - **3NF**: A relation is in 3NF if it satisfies **2NF** and **additionally**, there are **no transitive dependencies**. In simpler terms, non-prime attributes should **not depend** on other non-prime attributes.
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/3NF.jpg)
+        - Let's split the Employees table into three tables: Employees, Skills and Departments.
+        - Here, each table contains only those attributes that depend on its key.
+
+### Denormalization
+
+- The process of deliberately introducing redundancy into a database to improve performance by reducing the number of complex joins and optimizing data access.
+- **Denormalization** is used to **improve database performance** in situations where normalized data structures are **too slow** for certain operations.
+
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/unnormalized.jpg)
+- What’s wrong with it?
+    - **Redundancy**: For example, "Alice" and "Math" are repeated multiple times. Similarly, "Mr. Smith" is stored twice for the same class.
+    - **Update Anomalies**: If "Mr. Smith" changes to "Mr. Brown," we have to update multiple rows Missing one row could lead to inconsistencies.
+    - **Inefficient Storage**: Repeated information takes up unnecessary space.
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/normalized.jpg)
+- Why is this better?
+    - **No Redundancy**: "Mr. Smith" appears only once in the Classes Table, even if multiple subjects are associated with the class.
+    - **Easier Updates**: If "Mr. Smith" changes to "Mr. Brown," you only update the Classes Table and it automatically reflects everywhere.
+    - **Efficient Storage**: Repeated data is eliminated, saving space.
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/denormalized.jpg)
+- What’s happening here?
+    - All related information (student name, class name, teacher and subject) is stored in a single table.
+    - This simplifies querying because you **don’t need to join multiple tables**.
+
+- **Common Reasons for Denormalization**:
+    - **Improved Performance**: Reducing the number of joins between tables can significantly speed up queries.
+    - **Query Simplification**: Denormalization can simplify SQL queries, making them clearer and easier to maintain.
+    - **Optimized Data Reads**: In systems where data is read significantly more often than written, denormalization can improve performance.
+- **Advantages**:
+    - **Increased Query Speed**: Fewer joins mean faster queries.
+    - **Reduced Query Complexity**: Simpler SQL queries are easier to write and maintain.
+    - **Optimized Data Reads**: Improved read performance in read-heavy systems.
+- **Disadvantages**:
+    - **Data Redundancy**: Introducing duplicate data increases storage requirements.
+    - **Increased complexity of updates**: Updating data may require changing multiple records in different locations, increasing the likelihood of errors.
+    - **Data integrity issues**: It is more difficult to maintain data consistency, which can lead to anomalies.
+- **NOTE** that denormalization does not mean 'reversing normalization' or 'not to normalize'. It is an optimization technique that is applied after normalization.
