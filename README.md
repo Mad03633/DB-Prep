@@ -657,8 +657,79 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Database Management
 
-## CREATE
+### CREATE
 
-## ALTER
+- **Example**:
+    ```
+    CREATE TABLE Departments (
+        department_id INT PRIMARY KEY,
+        department_name VARCHAR(100) NOT NULL
+    );
 
-## DROP
+    CREATE TABLE Employees (
+        employee_id INT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        position VARCHAR(50),
+        salary DECIMAL(10, 2),
+        hire_date DATE,
+        department_id INT,
+        FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+    )
+    ```
+### ALTER
+
+- **Adding columns**:
+    ```
+    ALTER TABLE Employees
+    ADD COLUMN email VARCHAR(255)
+    ```
+- ** Removing columns**:
+    ```
+    ALTER TABLE Employees
+    DROP COLUMN email
+    ```
+- **Changing the data type of a column**:
+    ```
+    ALTER TABLE Employees
+    MODIFY COLUMN salary FLOAT
+    ```
+- **Renaming a column**:
+    ```
+    ALTER TABLE Employees
+    RENAME COLUMN name TO full_name
+    ```
+- **Adding constraints**:
+    ```
+    ALTER TABLE Employees
+    ADD CONSTRAINT unique_email UNIQUE(email)
+    ```
+- **Removing constraints**:
+    ```
+    ALTER TABLE Employees
+    DROP CONSTRAINT unique_email
+    ```
+- **Renaming a table**:
+    ```
+    ALTER TABLE Employees
+    RENAME TO Staff
+    ```
+
+### DROP
+
+- **Dropping a single table**:
+    ```
+    DROP TABLE Employees
+    ```
+- **Deleting a table with cascading dependency deletion**:
+    - Let's delete the Departments table referenced by the Employees table with a foreign key:
+        ```
+        -- If DBMS supports CASCADE
+        DROP TABLE Departments CASCADE
+        ```
+- **Deleting a table with existence check**:
+    ```
+    DROP TABLE IF EXISTS Employees
+    ```
+
+## Subqueries
+
