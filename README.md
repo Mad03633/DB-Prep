@@ -683,7 +683,7 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
     ALTER TABLE Employees
     ADD COLUMN email VARCHAR(255)
     ```
-- ** Removing columns**:
+- **Removing columns**:
     ```
     ALTER TABLE Employees
     DROP COLUMN email
@@ -732,4 +732,21 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
     ```
 
 ## Subqueries
+
+- **Nested Subqueries**: Nested subqueries are used to execute a query within another query. They can be in the SELECT, FROM, WHERE, or HAVING clauses. **Note: Nested → independent result.**
+    ```
+    SELECT department_id, avg_salary
+    FROM (SELECT department_id, AVG(salary) AS avg_salary FROM Employees
+    GROUP BY department_id) AS dept_avg_salaries
+    ```
+- **Correlated Subqueries**: Correlated subqueries depend on the outer query and are executed for each row of the outer query. These subqueries use values from the outer query in their conditions. **Note: Correlated → depends on outer query (row).**
+    ```
+    SELECT name, salary
+    FROM Employees E1
+    WHERE salary > (SELECT AVG(salary) 
+                    FROM Employees
+                    WHERE E1.department_id = E2.department_id)
+    ```
+
+## Modelling types
 
