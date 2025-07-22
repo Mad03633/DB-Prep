@@ -1050,3 +1050,25 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
         ```
 
 ## ORDER BY Clause
+
+- The **ORDER BY** keyword is used to **sort** the result in **ascending** or **descending** order.
+    ```
+    SELECT * FROM Products
+    ORDER BY Price
+    ```
+- The **ORDER BY** keyword sorts the records in **ascending** order by **default**. To sort the records in **descending** order, use the **DESC** keyword.
+    ```
+    SELECT * FROM Products
+    ORDER BY Price DESC
+    ```
+
+## GROUP BY Clause
+
+- The **GROUP BY** operator groups rows with the same values into **summary rows**, such as "find the number of customers in each country".
+- It is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result set by one or more columns.
+    ```
+    SELECT COUNT(CustomerID), Country FROM Cusomers
+    GROUP BY Country
+    ```
+
+## HAVING Clause
