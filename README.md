@@ -888,3 +888,117 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
     - **Roles**: Permission groups for managing access.
     - **Permissions**: Assigning access rights.
     - **Encryption**: Protecting data at the database level.
+
+## Data Query Language
+
+- **SELECT**:
+    - A data query begins with SELECT, followed by the columns to be displayed, the FROM keyword, and the table name.
+    - Multiple requested columns are specified separated by commas.
+        ```
+        SELECT CustomerName, City FROM Customers
+        ```
+    - If you want to return all columns, insert * after the SELECT word.
+        ```
+        SELECT * FROM Customers
+        ```
+    - The DISTINCT keyword after SELECT will return only unique values, without duplicates. Using the DISTINCT keyword in the COUNT function, we can return the number of different countries.
+        ```
+        SELECT COUNT(DISTINCT Country) FROM Customers
+        ```
+    - The SELECT TOP clause is used to specify the number of records to return.
+        ```
+        SELECT TOP 3 * FROM Customers
+        ```
+    - The SELECT INTO statement copies data from one table to a new table.
+        ```
+        SELECT * INTO CustomersBackup2017
+        FROM Customers
+        ```
+
+## WHERE Clause
+
+- The WHERE keyword is used to filter queries. Using it, the query will return only rows that satisfy the condition.
+    ```
+    SELECT * FROM Customers
+    WHERE Country = 'Mexico'
+    ```
+
+### Comparison Operators
+
+- **=**: Equal to.
+- **>**: Greater than.
+- **<**: Less than.
+- **>=**: Greater than or equal to.
+- **<=**: Less than or equal to.
+- **<>**: Not equal to.
+- **BETWEEN**: In an inclusive Range. This means that when you use BETWEEN value1 AND value2, both value1 and value2 are included in the result set.
+    ```
+    SELECT * FROM Products
+    WHERE Price BETWEEN 10 AND 20
+    ```
+- **LIKE**: Search for a pattern. 
+    - **Wildcards** that are used with the LIKE operator:
+        - The **percent sign %** represents zero, one, or more characters.
+            ```
+            SELECT * FROM Customers
+            WHERE CustomerName LIKE 'a%' -- Words that start with the letter 'a'
+            
+            SELECT * FROM Customers
+            WHERE city LIKE '%L%' -- Words that have the letter 'L' anywhere
+
+            SELECT * FROM Customers
+            WHERE CustomerName LIKE 'b%s' -- Words that start with 'b' and end with 'ѕ'
+            ```
+        - The **underscore _** represents a single character.
+            ```
+            SELECT * FROM Customers
+            WHERE CustomerName LIKE '_r%' -- Words with the letter 'r' in the second position
+            ```
+        - **[]** returns a result if any of the characters inside it matches.
+            ```
+            SELECT * FROM Customers
+            WHERE CustomerName LIKE '[bsp]%' -- Words that start with 'b', 's', or 'р'
+            ```
+        - **- the wildcard** allows you to specify a range of characters inside the wildcard [].
+            ```
+            SELECT * FROM Customers
+            WHERE CustomerName LIKE '[a-f]%' -- Words that start with letters 'a' through 'f' alphabetically 'a', 'b', 'c', 'd', 'e', 'f'
+            ```
+        - **#** represents any numeric character.
+            ```
+            SELECT * FROM Customers
+            WHERE CustomerId LIKE '2#5' -- '2#5' will find 205, 215, 225, 235, 245, 255, 265, 275, 285, and 295
+            ```
+        - **!** Represents any character not enclosed in square brackets.
+            ```
+            SELECT * FROM Customers
+            WHERE CustomerWorld LIKE 'h[!oa]t' -- It will find the word 'hit', but NOT hot or hat
+            ```
+- **IN**: To specify multiple possible values for a column.
+    ```
+    SELECT * FROM Customers
+    WHERE Country IN ('Germany', 'France', 'UK')
+    ```
+
+### Logical operators
+
+- **AND**: Using logical **AND**, you can set several conditions for the WHERE keyword.
+    ```
+    SELECT * FROM Customers
+    WHERE Country = 'Germnay'
+    AND City = 'Berlin'
+    AND PostalCode = 12000
+    ```
+- **OR**: Logical **OR** will return results in which one of the conditions matches.
+    ```
+    SELECT * FROM Customers
+    WHERE Country = 'Germany' OR Country = 'Spain'
+    ```
+- **NOT**: Logical **NOT** will return the opposite result from the condition. It can also be used in combination with other comparison operators.
+    ```
+    SELECT * FROM Customers
+    WHERE NOT Country = 'Spain'
+    ```
+
+## Aggregate functions in SQL
+
