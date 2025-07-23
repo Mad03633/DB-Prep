@@ -35,7 +35,7 @@
     <a href="#group-by-clause">GROUP BY Clause</a> •
     <a href="#having-clause">HAVING Clause</a> •
     <a href="#any/all-clause">ANY/ALL Clause</a> •
-    <a href="#as-clause">AS Clause</a> •
+    <a href="#as-keyword">AS Keyword</a> •
     <a href="#case-expression">CASE Expression</a> •
     <a href="#join">JOIN</a> •
     <a href="#union">UNION</a> •
@@ -1072,3 +1072,94 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
     ```
 
 ## HAVING Clause
+
+- The **HAVING clause** was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+    ```
+    SELECT COUNT(CustomerID), Country
+    FROM Customers
+    GROUP BY Country
+    HAVING COUNT(CustomerID) > 5
+    ```
+
+## ANY/ALL Clause
+
+-  The **ALL and ANY** operators are logical operators used to compare a value with a set of values returned by a subquery.
+    - The **ALL** must be preceded by comparison operators and evaluates true if all of the subqueries values meet the condition.
+    - ALL is used with SELECT, WHERE, and HAVING statements.
+    ```
+    SELECT column_name(s)
+    FROM table_name
+    WHERE column_name comparison_operator ALL
+        (SELECT column_name
+        FROM table_name
+        WHERE condition(s))
+
+    SELECT ProductName FROM Products
+    WHERE ProductID = ALL
+        (SELECT ProductID FROM OrderDetails
+        WHERE Quantity = 10)
+    -- The following SQL statement prints the product name if the quantity in all records in the Order Details table is 10. This will of course return FALSE since the Quantity column contains many different values.
+    ```
+    - **ANY** compares a value to each value in a list or results from a query and evaluates to true if the result of an inner query contains at least one row.
+    - **ANY** return true if any of the subqueries values meet the condition.
+    - **ANY** must be preceded by comparison operators.
+    ```
+    SELECT column_name(s) FROM table_name
+    WHERE column_name comparison_operator ANY
+        (SELECT column_name 
+        FROM table_name
+        WHERE condition(s))
+
+    SELECT ProductName FROM Products
+    WHERE ProductID = ANY
+        (SELECT ProductID FROM OrderDetails
+        WHERE Quantity = 10)
+    -- The following SQL statement prints the product name if it finds any records in the Order Details table whose quantity is 10.
+    ```
+
+## AS Keyword
+
+- SQL **aliases** are used to give a table or column in a table a temporary name.
+    ```
+    SELECT CustomerID as ID
+    FROM Customers
+    ```
+
+## CASE Expression
+
+- The **CASE expression** loops through the conditions and returns a value when the first condition is met (like an if-then-else statement). So once a condition is met, it stops reading and returns the result. If none of the conditions are met, it returns the value in the ELSE clause.
+    ```
+    CASE case_value
+    WHEN condition THEN result1
+    WHEN condition THEN result2
+    ...
+    Else result
+    END CASE;
+
+    SELECT OrderId, Quantity,
+    CASE
+        WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+        WHEN Quantity = 30 THEN 'The quantity is 30'
+        ELSE 'The quantity is under 30'
+    END AS QuantityText
+    FROM OrderDetails;
+    -- The CASE result will be returned in the QuantityText column as text.
+
+    SELECT CustomerName, Country
+    FROM Customer
+    ORDER BY
+    (CASE
+        WHEN Country = 'India' THEN Country
+        ELSE Age
+    END);
+    -- Let's take the Customer Table which contains CustomerID, CustomerName, LastName, Country, Age, and Phone. We can check the data of the Customer table by using the ORDER BY clause with the CASE statement.
+    ```
+- **Important Points About CASE Statement**:
+    - The SQL CASE statement is a conditional expression that allows for the execution of different queries based on specified conditions.
+    - There should always be a SELECT in the CASE statement.
+    - **END ELSE** is an optional component but WHEN THEN these cases must be included in the CASE statement.
+    - We can make any conditional statement using any conditional operator (like WHERE ) between WHEN and THEN. This includes stringing together multiple conditional statements using AND and OR.
+    - We can include multiple WHEN statements and an ELSE statement to counter with unaddressed conditions.
+
+## JOIN
+
