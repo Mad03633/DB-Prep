@@ -1163,3 +1163,46 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## JOIN
 
+![](https://github.com/Mad03633/DB-Prep/blob/main/Media/JOINS.jpg)
+
+- The **JOIN** clause is used to combine rows from two or more tables based on a related column between them.
+    - **INNER JOIN**: This mode of combining search results in SQL databases is enabled **automatically**. If you do not intentionally specify the Join type, then Inner Join will work. With it, you can specify two criteria at once (two tables) and filter the content by them.
+        ```
+        SELECT * FROM table-1
+        JOIN table-2 ON table-1.parameter = table-2.parameter
+        WHERE table-1.parameter IS 'myData'
+        ```
+    - **SELF JOIN**: Self Join queries are useful in cases where you need to filter content within one table. For example, you have a list of products in a database. Each of them has its own brand, but there are also those that are supplied by the same manufacturer. Self Join can be used to combine two stacks of information from one table.
+        ```
+        SELECT * FROM Products
+        JOIN Products ON table.product = table.brand
+        -- This scenario is useful in almost any type of database, since one table can often store information about products or content that have a large number of common parameters.
+        ```
+    - **LEFT JOIN**: Left join means when we take one table, connect the Second and at the same time show not only exact matches, but also the entire list of rows obtained from the left table, for which there was no pair in the right table.
+        ```
+        SELECT * FROM table-1
+        LEFT JOIN table-2 ON table-1.parameter = table-2.parameter
+        ```
+            ```
+            SELECT * FROM Russian
+            LEFT JOIN Rap ON Russian.genreId = Rap.genreId
+            -- Let's imagine that we have launched an advanced search on a website with music albums. We want to listen to something in Russian. And we are even ready to evaluate the quality of Russian rap. At the same time, in general, we do not like rap and do not want it to come across in any other languages.
+            ```
+    - **RIGHT JOIN**: It is clear that the right join will work in the opposite direction and will show elements from the right table, for which there was no pair in the left.
+        ```
+        SELECT * FROM table-1
+        LEFT JOIN table-2 ON table-1.parameter = table-2.parameter
+        ```
+    - **FULL OUTER JOIN**: This is an option for those who want to use two different criteria at once to search for some content. Let's go back to the example with the music application. Join Full can be useful if you want to listen to **either something in Russian or any rap**. You don't care about any other parameters. You care only about two characteristics. At the same time, you don't care whether they intersect. That is, you don't care whether it's rap in Russian or some aggressive metal in Russian.
+        ```
+        SELECT * FROM table-1
+        FULL OUTER JOIN table-2 ON table-1.parameter = table-2.parameter
+        ```
+    - **CROSS JOIN**: The most specific option for filtering data. It involves collecting all combinations of elements from several tables at once, without accessing any additional information. In fact, this is a Cartesian product.
+        ```
+        SELECT * FROM table-1
+        CROSS JOIN table-2
+        ```
+
+## UNION
+
