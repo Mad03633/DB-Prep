@@ -42,7 +42,8 @@
     <a href="#dml">Data Manipulaion Language</a> •
     <a href="#ddl">Data Definition Language</a> •
     <a href="#data-types">Data types</a> •
-    <a href="#constraints">Constraints</a> 
+    <a href="#constraints">Constraints</a> •
+    <a href="#additions">Additions</a>
 </p>
 
 ## Main Concepts
@@ -1323,3 +1324,83 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 ............. (There are many types. It was described main types.)
 
 ## Constraints
+
+- SQL **constraints** are essential elements in relational database design that ensure the **integrity, accuracy, and reliability** of the data stored in a database. SQL constraints are rules applied to **columns or tables** in a relational database to **limit the type of data** that can be inserted, updated, or deleted.
+- Constraints can be specified when a table is created with the CREATE TABLE statement or after the table is created with the ALTER TABLE statement.
+    ```
+    CREATE TABLE table_name(
+        column_1 datatype constraint,
+        column_2 datatype constraint,
+        column_3 datatype constraint,
+        ...
+    )
+    ```
+
+### Types
+
+- **NOT NULL**: By default, a column can contain **NULL values**. The **NOT NULL constraint** ensures that a column **cannot contain** NULL values. This is particularly important for columns where a **value is essential** for identifying records or performing calculations.
+    ```
+    CREATE TABLE Students(
+        ID INT(6) NOT NULL,
+        Name VARCHAR(10) NOT NULL,
+        Address VARCHAR(20)
+    )
+    ```
+- **UNIQUE**: The **UNIQUE** constraint ensures that all values in a column are **distinct** across all rows in a table. Unlike the **PRIMARY KEY**, which requires **uniqueness** and **does not allow NULLs**, the **UNIQUE constraint allows NULL values** but still enforces uniqueness for non-NULL entries.
+    ```
+    CREATE TABLE Students(
+        ID INT(6) NOT NULL UNIQUE,
+        Name VARCHAR(10), -- in the above example name column has not null constraint, but as we use NOT NULL UNIQUE in ID column, Name cannot have not null
+        Address VARCHAR(20)
+    )
+    ```
+- **PRIMARY KEY**: A **PRIMARY KEY** constraint is a combination of the **NOT NULL and UNIQUE** constraints. It uniquely identifies each row in a table. A table can only have **one PRIMARY KEY**, and it **cannot accept NULL** values.
+    ```
+    CREATE TABLE Students(
+        ID INT(6) NOT NULL UNIQUE,
+        Name VARCHAR(10),
+        Address VARCHAR(20),
+        PRIMARY KEY(ID)
+    )
+    ```
+- **FOREIGN KEY**: A **FOREIGN KEY** constraint is used to **prevent actions** that could break relationships between tables. A **FOREIGN KEY** is a field (or set of fields) in **one table that references a PRIMARY KEY** in another table. The **table with the foreign key** is called the **child table**, and the table with the **primary key** is called the **referencing** or **parent table**.
+    ```
+    CREATE TABLE Orders(
+        OrderID INT NOT NULL,
+        Order_no INT NOT NULL,
+        CustomerID INT,
+        PRIMARY KEY(OrderID),
+        FOREIGN KEY (CustomerID) REFERENCES Customers(OrderID)
+    )
+    ```
+- **CHECK**: The **CHECK constraint** allows us to specify a **condition** that data must satisfy **before it is inserted** into the table. This can be used to enforce rules, such as ensuring that a column’s value meets **certain criteria** (e.g., age must be greater than 18).
+    ```
+    CREATE TABLE Student(
+        ID INT(6) NOT NULL,
+        NAME VARCHAR(10) NOT NULL,
+        AGE INT NOT NULL CHECK (AGE >= 18)
+    )
+    ```
+- **DEFAULT**: The **DEFAULT** constraint provides a **default value** for a **column when no value** is specified during insertion. This is useful for ensuring that certain columns always have a **meaningful value**, even if the user does not provide one.
+    ```
+    CREATE TABLE Student(
+        ID INT(6) NOT NULL,
+        NAME VARCHAR(10) NOT NULL,
+        AGE INT DEFAULT 18
+    )
+    ```
+- **CREATE INDEX**: The **CREATE INDEX** Statement in SQL is used to **create indexes** in tables and **retrieve data** from the database **faster** than usual. Indexes are **invisible** structures that work behind the scenes to **speed up data retrieval operations** in databases. They are essential for **optimizing query** performance and improving overall system efficiency.
+    ```
+    CREATE INDEX index_name
+    ON table_name(column_1, column_2, ...);
+
+    CREATE UNIQUE UNDEX index_name
+    ON table_name(column_1, column_2, ...);
+    -- A unique index ensures that all values in the indexed columns are unique preventing duplicate values.
+
+    CREATE INDEX idx
+    ON Students(Name)
+    ```
+
+## Additions
+
