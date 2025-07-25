@@ -1313,3 +1313,13 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Data types
 
+- **INT**: Standard integer values. Range(-2,147,483,648 to 2,147,483,647)
+- **VARCHAR(size)**: The maximum length of 8000 characters.(Variable-Length non-Unicode Characters).
+- **DECIMAL(M, N)**: Exact fixed-point numbers. Total number of digits is specified in M size. Example: decimal(10, 4) = 654321.1234.
+- **BLOB**: For BLOBs (Binary Large Objects). Contains up to 65535 bytes of data. Can be used to store images.
+- **DATE**: Format: YYYY-MM-DD. Supported range of values is from "1000-01-01" to "9999-12-31".
+- **TIMESTAMP**: Timestamp values are stored as the number of seconds since the Unix epoch ('1970-01-01 00:00:00' UTC). Format: YYYY-MM-DD, hhmm:ss. The supported range is from '1970-01-01 00:00:01' UTC to '2038-01-09 03:14:07' UTC.
+- **TIME**: Stores the data of time (hour, minute,second).
+............. (There are many types. It was described main types.)
+
+## Constraints
