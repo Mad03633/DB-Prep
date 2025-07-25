@@ -1261,3 +1261,55 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Data Definition Language
 
+- **DROP**: The SQL DROP command is used to permanently remove an object from a database, such as a table, database, index, or view. To delete an entire table, type DROP TABLE table name. To delete an entire database and all of its associated tables
+    ```
+    DROP TABLE table_name;
+
+    DROP DATABASE database_name;
+    ```
+- **CREATE**: The CREATE TABLE command in SQL is used to define a new table within a database. A table's structure, including column names, data types, and constraints like NOT NULL, PRIMARY KEY, and CHECK, are defined when it is created in SQL.
+    ```
+    CREAT TABLE table_name(
+        column_name_1 datatype(size),
+        column_name_2 datatype(size),
+        column_name_3 datatype(size),
+        ...
+        column_name_N datatype(size)
+    )
+
+    CREATE TABLE Persons(
+        PersonID INT,
+        LastName VARCHAR(255),
+        FirstName VARCHAR(255),
+        Address VARCHAR(255),
+        City VARCHAR(255)
+    )
+    ```
+- **TRUNCATE**: The TRUNCATE TABLE statement is used to delete data within a table, but not the table itself. Although TRUNCATE is similar to the DELETE command (without the WHERE clause), it is much faster because it bypasses certain integrity constraints and locks.
+    ```
+    TRUNCATE TABLE table_name;
+    ```
+- **ALTER**: The ALTER TABLE statement is used to add, delete, or change columns in an existing table. 
+    - **ADD**:
+        ```
+        ALTER TABLE Customers
+        ADD Email VARCHAR(255)
+        ```
+    - **DROP COLUMN**:
+        ```
+        ALTER TABLE Customers
+        DROP COLUMN Email
+        ```
+    - **RENAME COLUMN**:
+        ```
+        ALTER TABLE table_name
+        RENAME COLUMN old_name TO new_name
+        ```
+    - **ALTER COLUMN**:
+        ```
+        ALTER TABLE table_name
+        ALTER COLUMN column_name datatype
+        ```
+
+## Data types
+
