@@ -1206,3 +1206,16 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## UNION
 
+- The **UNION operator** is used to combine the result set of two or more SELECT statements.
+    - Each SELECT statement in a UNION must contain the **same number of columns**.
+    - The columns must also contain **similar data types**.
+    - The columns in each SELECT statement must also be in the **same order**.
+- Note: SQL UNION and UNION ALL difference is that **UNION** operator **removes duplicate rows** from results set and **UNION ALL** operator **retains all rows**, including duplicate.
+    ```
+    SELECT Country FROM Emp_1
+    UNION 
+    SELECT Country FROM Emp_2
+    ```
+
+## Data Manipulaion Language
+
