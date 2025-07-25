@@ -1219,3 +1219,45 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Data Manipulaion Language
 
+- **INSERT INTO**: The INSERT INTO statement is used to insert new records into a table.
+    - **Example**: 
+        ```
+        INSERT INTO Customers(CustomerName, ContactName, Address, City, PostalCode, Country)
+        VALUES('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway')
+        ```
+    - There are two ways to write the INSERT INTO statement:
+        - Specify both the column names and the values to be inserted.
+            ```
+            INSERT INTO table_name(column1, column2, column3, ...)
+            VALUES(value1, value2, value3, ...);
+            ```
+        - If you are adding values for all the columns in a table, you do not need to specify the column names in the SQL query. However, make sure that the order of the values matches the order of the columns in the table. Here, the INSERT INTO syntax is:
+            ```
+            INSERT INTO table_name
+            VALUES(value1, value2, value3, ...)
+            ```
+- **UPDATE**: The UPDATE statement is used to change existing records in a table.
+    ```
+    UPDATE <table_name>
+    SET <column_name = value>
+    WHERE condition;
+
+    UPDATE Customers
+    SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+    WHERE CustomerID = 1 
+    ```
+- **DELETE**: The DELETE statement is used to delete existing records in a table.
+    ```
+    DELETE FROM <table_name>
+    WHERE <condition>; 
+
+    DELETE FROM Customers
+    WHERE CustomerName = 'Magnus Carlsen'
+    ```
+    - **NOTE**: If we do not specify the 'WHERE' condition then all the rows would be erased or deleted.
+        ```
+        DELETE FROM Customers
+        ```
+
+## Data Definition Language
+
