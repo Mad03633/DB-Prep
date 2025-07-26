@@ -1503,5 +1503,28 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
     //Rollback completed
     ```
 
-### Auto commit
+### Autocommit
 
+- **AUTOCOMMIT** is a database mode of operation in which each individual SQL statement is committed automatically upon execution, without the need to manually call COMMIT.
+
+- **When AUTOCOMMIT is on**:
+    - The DBMS automatically COMMITs changes after each query.
+    - You can't ROLLBACK the result - it's already committed.
+- **When  AUTOCOMMIT is off**:
+    - Changes are saved temporarily (in a transaction) until you call COMMIT.
+    - If something goes wrong, you can ROLLBACK.
+    ```
+    SET AUTOCOMMIT = 0;
+
+    START TRANSACTION;
+
+    INSERT INTO test 
+    VALUES (2);
+    ```
+
+| SQL Commands                   | AUTOCOMMIT                           |
+| -------------------------------|--------------------------------------|
+| DML (INSERT, UPDATE, DELETE)   |Yes, if autocommit is on              |
+| DDL (CREATE, DROP, ALTER)      |Yes, always, even if autocommit is off|
+| DCL (GRANT, REVOKE)            |Yes, always                           |
+| DQL (SELECT)                   |No                                    |
