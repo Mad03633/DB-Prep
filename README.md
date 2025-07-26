@@ -1404,3 +1404,104 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
 
 ## Additions
 
+### Auto increment
+
+- In SQL databases, a primary key is important for uniquely identifying records in a table. **However**, sometimes it is **not practical** to manually assign **unique values for each record**, especially when handling large datasets. To simplify this process, SQL databases offer an **Auto Increment** feature that **automatically generates unique numerical values for a specified column**.
+    ```
+    CREATE TABLE Persons (
+        Personid INT NOT NULL AUTO INCREMENT,
+        LastName VARCHAR(255) NOT NULL,
+        FirstName VARCHAR(255),
+        Age INT, 
+        PRIMARY KEY (Personid)
+    )
+    ```
+    - By default, the **starting value for AUTO_INCREMENT is 1**, and it will increment by 1 for each new record. To let the AUTO_INCREMENT sequence start with **another value**, use the following SQL statement:
+        ```
+        ALTER TABLE Persons
+        AUTO INCREMENT = 100
+        ```
+
+### View
+
+- **Views** in SQL are a type of **virtual table** that simplifies how users interact with data across one or more tables. **Unlike traditional tables**, a view in SQL **does not store data on disk**; instead, it **dynamically retrieves data** based on a pre-defined query each time it’s accessed.
+    ```
+    CREATE VIEW [Norwegian Customer] AS
+    SELECT CustomerName, ContactName FROM Customers
+    WHERE Country = 'Norway';
+
+    SELECT * FROM [Norwegian Customer];
+
+    -- Updating a View
+    CREATE OR REPLACE VIEW [Norwegian Customer] AS
+    SELECT CustomerName, ContactName, City
+    FROM Customers
+    WHERE Country = 'Norway';
+
+    -- Dropping a View
+    DROP VIEW [Norwegian Customer];
+    ```
+
+### Transactions & ACID
+
+- A **transaction** in SQL is a **sequence** of one or more SQL statements executed as a **single unit of work**. These statements could be performing operations like **INSERT, UPDATE, or DELETE**. The **main goal** of a transaction is to ensure that all operations within it should be either **completed successful** or **rolled back entirely if an error occurs**.
+- **Key properties of transactions (ACID)**:
+    - **Atomicity**: The outcome of a transaction can either be ***completely successful or completely unsuccessful**. The whole transaction must be rolled back if one part of it fails.
+    - **Consistency**: Transactions maintain **integrity restrictions** by moving the database from one valid state to another.
+    - **Isolation**: Concurrent transactions are isolated from one another, assuring the accuracy of the data.
+    - **Durability**: Once a transaction is **committed**, its modifications remain in effect even in the event of a **system failure**.
+
+| Command                    | Definition                                     |
+| ---------------------------| -----------------------------------------------|
+| START TRANSACTION or BEGIN |Begins a transaction                            |
+| COMMIT                     |Commits the transaction, changes are saved      |
+| ROLLBACK                   |Rolls back the transaction, discards all changes|
+| SAVEPOINT                  |Sets a savepoint within the transaction         |
+| ROLLBACK TO SAVEPOINT      |Reverts the transaction to a specific SAVEPOINT |
+| SET AUTOCOMMIT = 0/1       |Enables/disables automatic commit of operations |
+
+- **START TRANSACTION or BEGIN**: 
+    ```
+    START TRANSACTION;
+    
+    -- Deduct $150 from Account A
+    UPDATE Accounts
+    SET Balance = Balance - 150
+    WHERE AccountID = 'A';
+
+    -- Add $150 to Account B
+    UPDATE Accounts
+    SET Balance = Balance + 150
+    WHERE AccountID = 'B';
+
+    -- Commit the transaction if both operations succeed
+    COMMIT;
+    ```
+- **COMMIT**: 
+    ```
+    DELETE FROM Student WHERE Age = 20;
+
+    COMMIT;
+    ```
+- **ROLLBACK**:
+    ```
+    DELETE FROM Student WHERE AGE = 20;
+
+    ROLLBACK;
+    -- Delete those records from the table which have age = 20 and then ROLLBACK the changes in the database. In this case, the DELETE operation is undone, and the changes to the database are not saved.
+    ```
+- **SAVEPOINT and ROLLBACK TO SAVEPOINT**:
+    ```
+    SAVEPOINT SP1;
+    -- Savepoint created.
+    DELETE FROM Student WHERE AGE = 20;
+    -- deleted
+    SAVEPOINT SP2;
+    -- Savepoint created.
+
+    ROLLBACK TO SP1;
+    //Rollback completed
+    ```
+
+### Auto commit
+
