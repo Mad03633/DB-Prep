@@ -166,7 +166,7 @@ The **relational model** represents how data is stored and managed in **Relation
 
 ### DBMS Architecture
 
-The architecture of a database management system (DBMS) is a multi-level structure that provides efficient data management, storage, processing and access. The architecture of a DBMS may vary depending on the specific system and its features, but the basic components and levels remain similar.
+- The architecture of a database management system (DBMS) is a multi-level structure that provides efficient data management, storage, processing and access. The architecture of a DBMS may vary depending on the specific system and its features, but the basic components and levels remain similar.
     - **User layer (External)**: 
         - **Users**: Includes end users, applications, and interfaces that interact with the database.
         - **User Views**: The views of the data that the user sees and works with. These can include various interfaces such as graphical user interfaces (GUIs), web interfaces, and applications.
@@ -181,7 +181,7 @@ The architecture of a database management system (DBMS) is a multi-level structu
 
 ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/1_tier_level.jpg)
 
-It is a model in which the database is stored on a **file server**, and clients access the database by interacting with files through **network protocols**. In this architecture, the database itself is located on the server, and client applications use network file systems to access the data.
+- It is a model in which the database is stored on a **file server**, and clients access the database by interacting with files through **network protocols**. In this architecture, the database itself is located on the server, and client applications use network file systems to access the data.
 
 - A local copy of the data is created for each user while they are running.
 - **Advantages**: 
@@ -202,7 +202,7 @@ It is a model in which the database is stored on a **file server**, and clients 
 
 ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/2_tier_level.jpg)
 
-It is a model in which the main data processing and application logic is performed on the **client side**, and the **server** is responsible for **storing and managing data**. A thick client differs from a thin client in that it has more computing resources and functionality on the client side, allowing much of the work to be done locally.
+- It is a model in which the main data processing and application logic is performed on the **client side**, and the **server** is responsible for **storing and managing data**. A thick client differs from a thin client in that it has more computing resources and functionality on the client side, allowing much of the work to be done locally.
 
 - **Advantages**:
     - **Performance**: Most of the processing is performed on the client, the load on the server is reduced, which can improve overall system performance.
@@ -217,7 +217,7 @@ It is a model in which the main data processing and application logic is perform
 
 ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/3_tier_level.jpg)
 
-It is a**client-server architecture** model in which the application logic is divided into **three** interconnected tiers: the **Presentation** Tier, the **Application Logic** Tier, and the **Data** Tier. This structure provides flexibility, scalability, and simplifies application management.
+- It is a**client-server architecture** model in which the application logic is divided into **three** interconnected tiers: the **Presentation** Tier, the **Application Logic** Tier, and the **Data** Tier. This structure provides flexibility, scalability, and simplifies application management.
 
 - **Main components**:
     - **Presentation Tier**: Web pages, mobile applications, desktop programs.
