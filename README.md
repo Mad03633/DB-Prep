@@ -1503,6 +1503,19 @@ S, consisting of attributes (A1, A2,.., An} is a relation **R = (F - S)**
     //Rollback completed
     ```
 
+- **Isolation levels**: The **isolation level** determines how transactions can interact with each other, and how much they can **intersect and interfere** with each other during **parallel** operation. In other words, different isolation levels allow or do not allow different **anomalies** during parallel operation of transactions.
+
+    - There are 4 main isolation levels:
+        - **READ UNCOMMITTED**: This is the **weakest** isolation level, when a transaction **can see the results of other** transactions, even if they are **not yet committed**. **Dirty Read** - it is a situation when a transaction reads data that has not yet been committed.
+        - **READ COMMITTED**: At this level, a transaction can only read changes in other concurrent transactions that have already been committed. This saves us from **dirty reads**, **but does not** save us from non-repeatable reads or phantom reads. **Non-repeatable** read occurs when a transaction reads the same row twice and gets a different value each time. **Phantom Read** occurs when two same queries are executed, but the rows retrieved by the two, are different.
+        - **REPEATABLE READ**: This level means that until the transaction completes, no one else can modify or delete rows that the transaction has already read. This saves us from **both dirty reads and non-repeatable reads**, **but** it still doesn't solve the phantom read problem.
+        - **SERIALIZABLE**: The toughest, but the heaviest for the DB and the slowest for query processing level. It blocks any actions while a transaction is running - it turns out that transactions go strictly one after another and are maximally isolated from each other. Here we are **not afraid of any anomalies** - neither dirty, nor non-repeatable, nor phantom reading. But **performance suffers** here, because transactions cannot work in parallel.
+    - But also at the READ UNCOMMITTED and READ COMMITTED isolation levels, such anomalies may also occur as:
+        - **Lost Update (Потерянное обновление)**: when two transactions simultaneously read and modify the same data, and one of the changes may be lost.
+        - **Out-of-order Read (Неупорядоченное чтение)**: when multiple reads are performed in a random order, which may lead to incorrect results in transactions.
+
+    ![](https://github.com/Mad03633/DB-Prep/blob/main/Media/isolation_levels.jpg)
+
 ### Autocommit
 
 - **AUTOCOMMIT** is a database mode of operation in which each individual SQL statement is committed automatically upon execution, without the need to manually call COMMIT.
